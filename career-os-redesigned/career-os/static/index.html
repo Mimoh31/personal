@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Career OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- Screen: Login (separate page) -->
+  <section id="screen-login" class="screen active auth-screen">
+    <div class="auth-card">
+      <p class="auth-eyebrow">Career OS</p>
+      <h1>Log in</h1>
+      <p class="muted">Your job search, run as a pipeline.</p>
+      <input id="login-username" type="text" placeholder="Username" />
+      <input id="login-password" type="password" placeholder="Password" />
+      <button id="login-btn" class="primary" style="width:100%">Log in</button>
+      <p id="login-error" class="error"></p>
+      <p class="auth-footer">No account yet? <a href="#" id="go-to-register">Create one</a></p>
+    </div>
+  </section>
+
+  <!-- Screen: Register (separate page) -->
+  <section id="screen-register" class="screen auth-screen">
+    <div class="auth-card">
+      <p class="auth-eyebrow">Career OS</p>
+      <h1>Create account</h1>
+      <p class="muted">Local only &mdash; supports 2 or more accounts.</p>
+      <input id="create-username" type="text" placeholder="Username" />
+      <input id="create-password" type="password" placeholder="Password" />
+      <button id="create-btn" class="primary" style="width:100%">Create account</button>
+      <p id="create-error" class="error"></p>
+      <p class="auth-footer">Already have one? <a href="#" id="go-to-login">Log in</a></p>
+    </div>
+  </section>
+
+  <!-- Main shell (shown after login) -->
+  <section id="screen-main" class="screen">
+    <nav class="sidebar">
+      <p class="brand">Career OS</p>
+      <p class="user-label mono" id="user-label"></p>
+      <a href="#" data-view="dashboard" class="nav-item active">Dashboard</a>
+      <a href="#" data-view="profile" class="nav-item">Profile</a>
+      <a href="#" data-view="jobfeed" class="nav-item">Job feed</a>
+      <a href="#" data-view="board" class="nav-item">Ranked board</a>
+      <a href="#" data-view="cv" class="nav-item">CV workspace</a>
+      <a href="#" data-view="apply" class="nav-item">Application queue</a>
+      <a href="#" data-view="inbox" class="nav-item">Inbox &amp; folders</a>
+      <a href="#" id="logout-btn" class="nav-item logout">Log out</a>
+    </nav>
+
+    <main class="content">
+
+      <!-- View: Dashboard (landing page after login) -->
+      <div id="view-dashboard" class="view active">
+        <h2>Dashboard</h2>
+        <p class="muted">Where things stand right now.</p>
+        <div class="stat-grid" id="dashboard-stats"></div>
+        <h3>Jump to</h3>
+        <div class="tile-grid">
+          <a href="#" class="shortcut-tile" data-view="profile">Profile<p class="hint">CVs, preferences, guardrails</p></a>
+          <a href="#" class="shortcut-tile" data-view="jobfeed">Job feed<p class="hint">Raw search results</p></a>
+          <a href="#" class="shortcut-tile" data-view="board">Ranked board<p class="hint">Scored and tracked</p></a>
+          <a href="#" class="shortcut-tile" data-view="cv">CV workspace<p class="hint">Tailor and approve</p></a>
+          <a href="#" class="shortcut-tile" data-view="apply">Application queue<p class="hint">Review before you submit</p></a>
+          <a href="#" class="shortcut-tile" data-view="inbox">Inbox &amp; folders<p class="hint">Drop exports here</p></a>
+        </div>
+      </div>
+
+      <!-- View: Profile -->
+      <div id="view-profile" class="view">
+        <h2>Set up profile</h2>
+        <p class="muted">One-time onboarding, editable any time.</p>
+
+        <div class="field-group">
+          <label>CV versions</label>
+          <input type="file" id="cv-files" multiple />
+          <button id="cv-upload-btn">Upload files</button>
+          <p class="hint">Select multiple files at once.</p>
+          <ul id="cv-list" class="file-list"></ul>
+        </div>
+
+        <div class="field-group">
+          <label>LinkedIn profile</label>
+          <input type="file" id="linkedin-file" accept=".zip" />
+          <button id="linkedin-upload-btn">Upload export</button>
+          <p class="hint">Data export .zip, or paste your public profile URL below.</p>
+          <input type="text" id="linkedin-url" placeholder="linkedin.com/in/yourname" />
+          <p id="linkedin-status" class="hint"></p>
+        </div>
+
+        <div class="row-field">
+          <label>Portfolio / GitHub link</label>
+          <input type="text" id="portfolio" placeholder="github.com/yourname" />
+        </div>
+        <div class="row-field">
+          <label>Work authorization</label>
+          <select id="work-auth">
+            <option value="citizen">Citizen</option>
+            <option value="visa">Visa required</option>
+            <option value="pr">PR / green card</option>
+          </select>
+        </div>
+
+        <h3>Preferences</h3>
+        <div class="row-field">
+          <label>Current salary</label>
+          <input type="text" id="salary-current" placeholder="e.g. 28 LPA" />
+        </div>
+        <div class="row-field">
+          <label>Expected salary</label>
+          <input type="text" id="salary-expected" placeholder="e.g. 40 LPA" />
+        </div>
+        <div class="row-field">
+          <label>Willing to relocate</label>
+          <select id="relocate">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="some">Select cities</option>
+          </select>
+        </div>
+        <div class="row-field">
+          <label>Notice period</label>
+          <input type="text" id="notice-period" placeholder="e.g. 60 days" />
+        </div>
+
+        <h3>Guardrails</h3>
+        <p class="hint">Instructions the CV tailor agent must always follow. Shown at the top of the CV workspace.</p>
+        <textarea id="guardrails" rows="3" placeholder="e.g. never remove certifications, keep summary under 3 lines"></textarea>
+
+        <div class="actions">
+          <button id="save-profile-btn" class="primary">Save profile</button>
+          <span id="save-status" class="hint"></span>
+        </div>
+
+        <h3>Guidance <span class="hint">from Agent 1</span></h3>
+        <div id="guidance-panel" class="field-group">
+          <p class="hint">No guidance yet. Run the agent1-profile-guidance skill in Claude Code after uploading your CVs.</p>
+        </div>
+      </div>
+
+      <!-- View: Job feed -->
+      <div id="view-jobfeed" class="view">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2>Job feed</h2>
+          <button id="run-agent5-btn" class="primary">Run web search agent</button>
+        </div>
+        <p class="muted">Raw, unranked candidates from search agents.</p>
+        <p id="agent5-run-status" class="hint"></p>
+        <ul id="job-list" class="file-list"></ul>
+      </div>
+
+      <div id="view-board" class="view">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2>Ranked board</h2>
+          <button id="open-add-job">Add job</button>
+        </div>
+        <p class="muted">Scored and deduped by Agent 6.</p>
+        <div id="board-columns" class="board-grid"></div>
+      </div>
+      <div id="view-cv" class="view">
+        <h2>CV workspace</h2>
+        <label class="hint">Job</label>
+        <select id="cv-job-select" style="width:100%;margin-bottom:12px"></select>
+        <div id="cv-workspace-body"></div>
+      </div>
+      <div id="view-apply" class="view">
+        <h2>Application queue</h2>
+        <p class="muted">Prepared by Agent 8. Submit is always on you.</p>
+        <div id="apply-list"></div>
+      </div>
+      <div id="view-inbox" class="view">
+        <h2>Inbox &amp; folders</h2>
+        <p class="muted">Drop platform exports here for Agents 2-4 to parse.</p>
+        <div id="inbox-status"></div>
+      </div>
+
+    </main>
+  </section>
+
+  <div id="add-job-modal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <p style="font-weight:500;font-size:15px;margin:0 0 12px">Add job manually</p>
+      <div id="add-job-url-step">
+        <label class="hint">Job posting link</label>
+        <input type="text" id="manual-url" placeholder="https://company.com/careers/123" />
+        <div class="actions">
+          <button id="cancel-add-job">Cancel</button>
+          <button id="fetch-job-btn" class="primary">Fetch job</button>
+        </div>
+      </div>
+      <div id="add-job-jd-step" class="hidden">
+        <p id="fetch-error" class="error"></p>
+        <label class="hint">Job description</label>
+        <textarea id="manual-jd" rows="5" placeholder="Paste the full job description here"></textarea>
+        <div class="actions">
+          <button id="cancel-add-job-2">Cancel</button>
+          <button id="submit-jd-btn" class="primary">Add to board</button>
+        </div>
+      </div>
+      <p id="add-job-status" class="hint"></p>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

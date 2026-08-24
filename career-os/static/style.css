@@ -1,0 +1,161 @@
+:root {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --border: #e0ddd4;
+  --text: #2c2c2a;
+  --text-muted: #73726c;
+  --accent: #185fa5;
+  --accent-bg: #e6f1fb;
+  --danger: #a32d2d;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.screen { display: none; }
+.screen.active { display: block; }
+.hidden { display: none !important; }
+
+/* Login */
+#screen-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.auth-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 280px;
+  text-align: center;
+}
+.auth-card h1 { font-size: 20px; font-weight: 500; margin: 0 0 4px; }
+.auth-card h2 { font-size: 17px; font-weight: 500; margin: 0 0 12px; }
+.muted { color: var(--text-muted); font-size: 13px; margin: 0 0 16px; }
+.auth-card input { width: 100%; margin-bottom: 10px; }
+.error { color: var(--danger); font-size: 12px; min-height: 16px; }
+
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+button {
+  cursor: pointer;
+  background: var(--surface);
+}
+button:hover { background: var(--bg); }
+button.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+button.primary:hover { opacity: 0.9; }
+a { color: var(--accent); font-size: 13px; text-decoration: none; }
+
+/* Main shell */
+#screen-main.active { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 200px;
+  background: var(--surface);
+  border-right: 0.5px solid var(--border);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar .brand { font-weight: 500; margin: 0 0 2px; }
+.sidebar .user-label { font-size: 12px; color: var(--text-muted); margin: 0 0 16px; }
+.nav-item {
+  display: block;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 14px;
+}
+.nav-item:hover { background: var(--bg); }
+.nav-item.active { background: var(--accent-bg); color: var(--accent); }
+.nav-item.logout { margin-top: auto; color: var(--danger); }
+
+.content { flex: 1; padding: 2rem; max-width: 640px; }
+.view { display: none; }
+.view.active { display: block; }
+.content h2 { font-size: 18px; font-weight: 500; margin: 0 0 4px; }
+.content h3 { font-size: 15px; font-weight: 500; margin: 20px 0 6px; }
+
+.field-group {
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.field-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+.field-group input[type=text] { width: 100%; margin-top: 8px; }
+.hint { font-size: 12px; color: var(--text-muted); margin: 4px 0; }
+.file-list { list-style: none; padding: 0; margin: 8px 0 0; font-size: 13px; }
+.file-list li { padding: 6px 0; border-bottom: 0.5px solid var(--border); }
+.file-list li:last-child { border-bottom: none; }
+.tag { font-size: 11px; padding: 2px 6px; border-radius: 6px; display: inline-block; }
+
+.row-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.row-field label { font-size: 13px; }
+.row-field input, .row-field select { width: 160px; }
+
+textarea { width: 100%; resize: vertical; }
+
+.actions { margin-top: 16px; display: flex; align-items: center; gap: 10px; }
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.board-col h4 { font-size: 12px; color: var(--text-muted); margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.02em; }
+.board-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.board-card .job-title { font-weight: 500; display: block; }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.modal-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1.25rem;
+  width: 340px;
+}
+.modal-card input, .modal-card textarea { width: 100%; margin: 6px 0 4px; }

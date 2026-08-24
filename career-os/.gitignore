@@ -1,0 +1,21 @@
+# Personal data — never published. Framework/code above this line is public.
+data/accounts.json
+data/profiles/
+data/profile-imports/
+data/guidance/
+data/cv-tailoring/
+data/apply-queue/
+cv-library/*
+!cv-library/.gitkeep
+inbox/linkedin/*
+!inbox/linkedin/.gitkeep
+inbox/naukri/*
+!inbox/naukri/.gitkeep
+inbox/indeed/*
+!inbox/indeed/.gitkeep
+
+# Local runtime
+__pycache__/
+*.pyc
+.venv/
+data/manual-job-requests.json
